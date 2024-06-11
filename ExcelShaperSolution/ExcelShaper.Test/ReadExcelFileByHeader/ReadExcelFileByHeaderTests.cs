@@ -10,7 +10,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine.ReadExcelFileByHeader(filePath);
+            var ret = Engine2.ReadExcelFileByHeader(filePath);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(100);
             ret.ForEach(x => { x.Should().NotBeNullOrEmpty(); x.Count.Should().Be(8); });
@@ -22,7 +22,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine.ReadExcelFileByHeader(filePath, (rowData) =>
+            var ret = Engine2.ReadExcelFileByHeader(filePath, (rowData) =>
             {
                 return new Person
                 {
@@ -47,7 +47,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine.ReadExcelFileByHeader<Person>(filePath);
+            var ret = Engine2.ReadExcelFileByHeader<Person>(filePath);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(100);
             ret.ForEach(x => { x.Should().NotBeNull(); });
@@ -59,7 +59,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine.ReadExcelFileByHeader<Employee>(filePath, 2);
+            var ret = Engine2.ReadExcelFileByHeader<Employee>(filePath, 2);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(1000);
             ret.ForEach(x => { x.Should().NotBeNull(); });

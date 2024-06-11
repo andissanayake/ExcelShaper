@@ -283,9 +283,9 @@ namespace ExcelShaper
             }
             return cellValue;
         }
-        private static string ToKey(this string str)
-        {
-            return str.Trim().ToLower().Replace(" ", "");
-        }
+        //private static string ToKey(this string str)
+        //{
+        //    return str.Trim().ToLower().Replace(" ", "");
+        //}
     }
 }

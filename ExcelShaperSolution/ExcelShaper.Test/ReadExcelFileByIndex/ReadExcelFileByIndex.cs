@@ -9,7 +9,7 @@ namespace ExcelShaper.Test.ReadExcelFileByIndex
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByIndex", "ReadExcelFileByIndex.xlsx");
-            var ret = Engine.ReadExcelFileByIndex(filePath);
+            var ret = Engine2.ReadExcelFileByIndex(filePath);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(101);
             ret.ForEach(x => { x.Should().NotBeNullOrEmpty(); x.Count.Should().Be(8); });
@@ -20,8 +20,8 @@ namespace ExcelShaper.Test.ReadExcelFileByIndex
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByIndex", "ReadExcelFileByIndex.xlsx");
-            var ret1 = Engine.ReadExcelFileByIndex(filePath, 0);
-            var ret2 = Engine.ReadExcelFileByIndex(filePath, 1);
+            var ret1 = Engine2.ReadExcelFileByIndex(filePath, 0);
+            var ret2 = Engine2.ReadExcelFileByIndex(filePath, 1);
 
             ret1.Should().NotBeNullOrEmpty();
             ret1.Count.Should().Be(101);
@@ -38,7 +38,7 @@ namespace ExcelShaper.Test.ReadExcelFileByIndex
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByIndex", "ReadExcelFileByIndex.xlsx");
-            var ret = Engine.ReadExcelFileByIndex(filePath, (i, rowData) =>
+            var ret = Engine2.ReadExcelFileByIndex(filePath, (i, rowData) =>
             {
                 //to avoid first header raw
                 if (i > 0)
@@ -68,7 +68,7 @@ namespace ExcelShaper.Test.ReadExcelFileByIndex
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByIndex", "ReadExcelFileByIndex.xlsx");
-            var ret = Engine.ReadExcelFileByIndex(filePath, (i, rowData) =>
+            var ret = Engine2.ReadExcelFileByIndex(filePath, (i, rowData) =>
             {
                 //to avoid first header raw
                 if (i > 0)
