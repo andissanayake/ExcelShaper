@@ -15,7 +15,7 @@ namespace ExcelShaper
         /// <returns>A list of lists of strings representing the data in the Excel file.</returns>
         public static List<List<string>> ReadExcelFileByIndex(string filePath, int sheetIndex = 0)
         {
-            List<List<string>> excelData = new List<List<string>>();
+            List<List<string>> excelData = new();
 
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
             {
@@ -29,7 +29,7 @@ namespace ExcelShaper
                 for (int i = 0; i < sheetData.Elements<Row>().Count(); i++)
                 {
                     Row row = sheetData.Elements<Row>().ElementAt(i);
-                    List<string> rowData = new List<string>();
+                    List<string> rowData = new();
 
                     foreach (Cell cell in row.Elements<Cell>())
                     {
@@ -56,7 +56,7 @@ namespace ExcelShaper
         /// <returns>A list of objects of type T representing the converted data.</returns>
         public static List<T> ReadExcelFileByIndex<T>(string filePath, Func<int, List<string>, T?> convertFunctionPointer, int sheetIndex = 0)
         {
-            List<T> excelData = new List<T>();
+            List<T> excelData = new();
 
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
             {
@@ -70,7 +70,7 @@ namespace ExcelShaper
                 for (int i = 0; i < sheetData.Elements<Row>().Count(); i++)
                 {
                     Row row = sheetData.Elements<Row>().ElementAt(i);
-                    List<string> rowData = new List<string>();
+                    List<string> rowData = new();
 
                     foreach (Cell cell in row.Elements<Cell>())
                     {
@@ -96,7 +96,7 @@ namespace ExcelShaper
         /// <returns>A list of dictionaries representing the data in the Excel file.</returns>
         public static List<Dictionary<string, string>> ReadExcelFileByHeader(string filePath, int sheetIndex = 0)
         {
-            List<Dictionary<string, string>> excelData = new List<Dictionary<string, string>>();
+            List<Dictionary<string, string>> excelData = new();
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
             {
                 WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart!;
@@ -109,7 +109,7 @@ namespace ExcelShaper
                 for (int i = 1; i < sheetData.Elements<Row>().Count(); i++)
                 {
                     Row row = sheetData.Elements<Row>().ElementAt(i);
-                    Dictionary<string, string> rowData = new Dictionary<string, string>();
+                    Dictionary<string, string> rowData = new();
 
                     for (int j = 0; j < row.Elements<Cell>().Count(); j++)
                     {
@@ -136,7 +136,7 @@ namespace ExcelShaper
         /// <returns>A list of objects of type T representing the converted data.</returns>
         public static List<T> ReadExcelFileByHeader<T>(string filePath, Func<Dictionary<string, string>, T?> convertFunctionPointer, int sheetIndex = 0) where T : new()
         {
-            List<T> excelData = new List<T>();
+            List<T> excelData = new();
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
             {
                 WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart!;
@@ -149,7 +149,7 @@ namespace ExcelShaper
                 for (int i = 1; i < sheetData.Elements<Row>().Count(); i++)
                 {
                     Row row = sheetData.Elements<Row>().ElementAt(i);
-                    Dictionary<string, string> rowData = new Dictionary<string, string>();
+                    Dictionary<string, string> rowData = new();
 
                     for (int j = 0; j < row.Elements<Cell>().Count(); j++)
                     {
@@ -177,7 +177,7 @@ namespace ExcelShaper
         /// <returns>A list of objects of type T representing the converted data.</returns>
         public static List<T> ReadExcelFileByHeader<T>(string filePath, int sheetIndex = 0, string dateFormat = "dd/MM/yyyy") where T : new()
         {
-            List<T> excelData = new List<T>();
+            List<T> excelData = new();
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filePath, false))
             {
                 WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart!;
@@ -190,7 +190,7 @@ namespace ExcelShaper
                 for (int i = 1; i < sheetData.Elements<Row>().Count(); i++)
                 {
                     Row row = sheetData.Elements<Row>().ElementAt(i);
-                    Dictionary<string, string> rowData = new Dictionary<string, string>();
+                    Dictionary<string, string> rowData = new();
 
                     for (int j = 0; j < row.Elements<Cell>().Count(); j++)
                     {
@@ -213,7 +213,7 @@ namespace ExcelShaper
                 throw new ArgumentNullException(nameof(rowData));
             }
 
-            T obj = new T();
+            T obj = new();
             var columnNames = rowData.Keys.ToList();
             var propertyMap = MapProperties<T>(columnNames);
 
@@ -226,7 +226,7 @@ namespace ExcelShaper
                     {
                         if (string.IsNullOrEmpty(pair.Value))
                         {
-                            value = null;
+                            value = default!;
                         }
                         else if (int.TryParse(pair.Value, out int intValue))
                         {

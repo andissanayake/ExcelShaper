@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34902.65
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelShaper", "ExcelShaper\ExcelShaper.csproj", "{2D943F0A-2606-4E32-9129-E7FE96E54043}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExcelShaper.Test", "ExcelShaper.Test\ExcelShaper.Test.csproj", "{243F637F-0C5B-4681-AF39-4E5D009B6D56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D943F0A-2606-4E32-9129-E7FE96E54043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D943F0A-2606-4E32-9129-E7FE96E54043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D943F0A-2606-4E32-9129-E7FE96E54043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D943F0A-2606-4E32-9129-E7FE96E54043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243F637F-0C5B-4681-AF39-4E5D009B6D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243F637F-0C5B-4681-AF39-4E5D009B6D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243F637F-0C5B-4681-AF39-4E5D009B6D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243F637F-0C5B-4681-AF39-4E5D009B6D56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDBD4616-E923-4EED-8F05-61D0D8A62A26}
+	EndGlobalSection
+EndGlobal
