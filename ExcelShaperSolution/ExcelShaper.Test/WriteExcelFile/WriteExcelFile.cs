@@ -7,6 +7,9 @@ namespace ExcelShaper.Test.WriteExcelFile
         [Fact]
         public void WriteTest()
         {
+            string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
+            string filePath = Path.Combine(rootPath, "WriteExcelFile", "WriteExcelFile.xlsx");
+
             List<Person> people = new List<Person>
             {
                 new Person { Name = "John Doe", BirthDate = new DateTime(1990, 5, 10), Address = new Address { Street = "123 Main St", City = "Anytown" } },
@@ -37,7 +40,6 @@ namespace ExcelShaper.Test.WriteExcelFile
                 }
             };
 
-            string filePath = "people.xlsx";
             Engine2.WriteToExcel(filePath, people, customHeaders, complexPropertyConverter);
         }
 
