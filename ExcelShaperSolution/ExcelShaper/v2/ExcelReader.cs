@@ -3,7 +3,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace ExcelShaper
 {
-    public class Engine2
+    public partial class Engine2
     {
         public static List<List<string>> ReadExcelFileByIndex(string filePath, int sheetIndex = 0)
         {
