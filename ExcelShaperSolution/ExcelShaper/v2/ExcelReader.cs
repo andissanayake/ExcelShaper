@@ -1,9 +1,9 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace ExcelShaper
+namespace ExcelShaperLib
 {
-    public partial class Engine2
+    public partial class ExcelShaper
     {
         public static List<List<string>> ReadExcelFileByIndex(string filePath, int sheetIndex = 0)
         {

@@ -1,7 +1,7 @@
-﻿using FluentAssertions;
+﻿using ExcelShaperLib;
+using FluentAssertions;
 using System.Globalization;
-
-namespace ExcelShaper.Test.ReadExcelFileByHeader
+namespace ExcelShaperTest.ReadExcelFileByHeader
 {
     public class ReadExcelFileByHeaderTests
     {
@@ -10,7 +10,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine2.ReadExcelFileByHeader(filePath);
+            var ret = ExcelShaper.ReadExcelFileByHeader(filePath);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(100);
             ret.ForEach(x => { x.Should().NotBeNullOrEmpty(); x.Count.Should().Be(8); });
@@ -22,7 +22,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine2.ReadExcelFileByHeader(filePath, (rowData) =>
+            var ret = ExcelShaper.ReadExcelFileByHeader(filePath, (rowData) =>
             {
                 return new Person
                 {
@@ -47,7 +47,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine2.ReadExcelFileByHeader<Person>(filePath);
+            var ret = ExcelShaper.ReadExcelFileByHeader<Person>(filePath);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(100);
             ret.ForEach(x => { x.Should().NotBeNull(); });
@@ -59,7 +59,7 @@ namespace ExcelShaper.Test.ReadExcelFileByHeader
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "ReadExcelFileByHeader", "ReadExcelFileByHeader.xlsx");
-            var ret = Engine2.ReadExcelFileByHeader<Employee>(filePath, 2);
+            var ret = ExcelShaper.ReadExcelFileByHeader<Employee>(filePath, 2);
             ret.Should().NotBeNullOrEmpty();
             ret.Count.Should().Be(1000);
             ret.ForEach(x => { x.Should().NotBeNull(); });

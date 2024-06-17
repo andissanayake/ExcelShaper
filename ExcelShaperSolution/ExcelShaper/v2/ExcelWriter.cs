@@ -3,30 +3,28 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System.Reflection;
 
-namespace ExcelShaper
+namespace ExcelShaperLib
 {
-    public partial class Engine2
+    public partial class ExcelShaper
     {
         public static void WriteToExcel<T>(string filePath, List<T> data, Dictionary<string, string>? headers = null, Func<T, PropertyInfo, string> complexPropertyConverter = null)
         {
-            using (SpreadsheetDocument document = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook))
-            {
-                WorkbookPart workbookPart = document.AddWorkbookPart();
-                workbookPart.Workbook = new Workbook();
+            using SpreadsheetDocument document = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook);
+            WorkbookPart workbookPart = document.AddWorkbookPart();
+            workbookPart.Workbook = new Workbook();
 
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet(new SheetData());
+            WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+            worksheetPart.Worksheet = new Worksheet(new SheetData());
 
-                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                Sheet sheet = new Sheet() { Id = document.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
-                sheets.Append(sheet);
+            Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+            Sheet sheet = new() { Id = document.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Sheet1" };
+            sheets.Append(sheet);
 
-                var columns = WriteDataToWorksheet(worksheetPart, data, headers, complexPropertyConverter);
+            var columns = WriteDataToWorksheet(worksheetPart, data, headers, complexPropertyConverter);
 
-                AddTableDefinition(worksheetPart, data.Count, columns);
+            AddTableDefinition(worksheetPart, data.Count, columns);
 
-                workbookPart.Workbook.Save();
-            }
+            workbookPart.Workbook.Save();
         }
 
         private static int WriteDataToWorksheet<T>(WorksheetPart worksheetPart, List<T> data, Dictionary<string, string>? headers, Func<T, PropertyInfo, string> complexPropertyConverter)
@@ -38,10 +36,10 @@ namespace ExcelShaper
 
             foreach (T item in data)
             {
-                Row row = new Row();
+                Row row = new();
                 foreach (var property in properties)
                 {
-                    Cell cell = new Cell();
+                    Cell cell = new();
                     object value = property.GetValue(item);
                     string cellValue = (complexPropertyConverter != null && value != null) ? complexPropertyConverter(item, property) : value?.ToString() ?? string.Empty;
                     cell.CellValue = new CellValue(cellValue);
@@ -56,10 +54,10 @@ namespace ExcelShaper
 
         private static void AddHeaderRow(SheetData sheetData, PropertyInfo[] properties, Dictionary<string, string>? headers)
         {
-            Row headerRow = new Row();
+            Row headerRow = new();
             foreach (var property in properties)
             {
-                Cell cell = new Cell
+                Cell cell = new()
                 {
                     CellValue = new CellValue(headers != null && headers.ContainsKey(property.Name) ? headers[property.Name] : property.Name),
                     DataType = CellValues.String,
@@ -74,7 +72,7 @@ namespace ExcelShaper
         {
             var tableDefinitionPart = worksheetPart.AddNewPart<TableDefinitionPart>();
             string tableRange = $"A1:{(char)('A' + columnCount - 1)}{rowCount + 1}";
-            Table table = new Table
+            Table table = new()
             {
                 Id = 1,
                 Name = "Table1",
@@ -83,7 +81,7 @@ namespace ExcelShaper
                 TotalsRowShown = false
             };
 
-            TableColumns tableColumns = new TableColumns() { Count = (uint)columnCount };
+            TableColumns tableColumns = new() { Count = (uint)columnCount };
             for (int i = 0; i < columnCount; i++)
             {
                 tableColumns.Append(new TableColumn() { Id = (uint)(i + 1), Name = $"Column{i + 1}" });

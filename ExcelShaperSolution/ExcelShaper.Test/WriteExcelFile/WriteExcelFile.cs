@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using ExcelShaperLib;
+using System.Reflection;
 
-namespace ExcelShaper.Test.WriteExcelFile
+namespace ExcelShaperTest.WriteExcelFile
 {
     public class WriteExcelFile
     {
@@ -10,13 +11,13 @@ namespace ExcelShaper.Test.WriteExcelFile
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory))))!;
             string filePath = Path.Combine(rootPath, "WriteExcelFile", "WriteExcelFile.xlsx");
 
-            List<Person> people = new List<Person>
+            List<Person> people = new()
             {
-                new Person { Name = "John Doe", BirthDate = new DateTime(1990, 5, 10), Address = new Address { Street = "123 Main St", City = "Anytown" } },
-                new Person { Name = "Jane Smith", BirthDate = new DateTime(1985, 10, 15), Address = new Address { Street = "456 Elm St", City = "Otherville" } }
+                new() { Name = "John Doe", BirthDate = new DateTime(1990, 5, 10), Address = new Address { Street = "123 Main St", City = "Anytown" } },
+                new() { Name = "Jane Smith", BirthDate = new DateTime(1985, 10, 15), Address = new Address { Street = "456 Elm St", City = "Otherville" } }
             };
 
-            Dictionary<string, string> customHeaders = new Dictionary<string, string>
+            Dictionary<string, string> customHeaders = new()
             {
                 { "Name", "Full Name" },
                 { "BirthDate", "Date of Birth" },
@@ -40,7 +41,7 @@ namespace ExcelShaper.Test.WriteExcelFile
                 }
             };
 
-            Engine2.WriteToExcel(filePath, people, customHeaders, complexPropertyConverter);
+            ExcelShaper.WriteToExcel(filePath, people, customHeaders, complexPropertyConverter);
         }
 
     }

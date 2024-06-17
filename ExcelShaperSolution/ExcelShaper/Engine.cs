@@ -3,7 +3,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using System.Globalization;
 using System.Reflection;
 
-namespace ExcelShaper
+namespace ExcelShaperLib
 {
     public static class Engine
     {
